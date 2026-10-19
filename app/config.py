@@ -29,6 +29,7 @@ def load_env_file(path: Path | None = None) -> None:
 class Settings:
     # Azure deployment name doubles as the "model" identifier in reports
     deployment: str = "gpt-5.6-luna"
+    api_version: str = "2024-10-21"
     provider_timeout_s: float = 120.0
     max_tokens: int = 4096
     max_retries: int = 2
@@ -53,6 +54,7 @@ class Settings:
         )
         return cls(
             deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT", d.deployment),
+            api_version=os.getenv("AZURE_OPENAI_API_VERSION", d.api_version),
             provider_timeout_s=float(_get_val("TIMEOUT_S", str(d.provider_timeout_s))),
             max_tokens=int(_get_val("MAX_TOKENS", str(d.max_tokens))),
             max_retries=int(_get_val("MAX_RETRIES", str(d.max_retries))),

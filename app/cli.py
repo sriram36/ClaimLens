@@ -47,6 +47,7 @@ def cmd_run(settings, args):
     answers, cat, gold = _load(settings)
     provider = AzureProvider(
         deployment=settings.deployment,
+        api_version=settings.api_version,
         max_retries=settings.max_retries,
         temperature=settings.temperature,
     )

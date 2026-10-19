@@ -99,6 +99,7 @@ def get_provider_factory(settings: Settings = Depends(get_settings)):
         try:
             return AzureProvider(
                 deployment=settings.deployment,
+                api_version=settings.api_version,
                 max_retries=settings.max_retries,
                 temperature=settings.temperature,
             )
