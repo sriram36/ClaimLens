@@ -1,11 +1,11 @@
-# Run d5db841b-e639-4c02-ae8c-4657cbd3412f
+# Run 4015a31f-ac86-4d7c-a596-b18ef7f62f48
 
 - split: **development**  |  agent: **v2** (prompt-v2)  |  status: completed
 - provider/model: azure / gpt-5.6-luna
 - versions: dataset `long-brand-answers-50-v4`, facts `speaker-catalogue-v4`, evaluator `sentence-spans-and-labels-v4`
-- settings: `{"deployment": "gpt-5.6-luna", "provider_timeout_s": 120.0, "max_tokens": 4096, "max_retries": 2, "temperature": null, "max_turns": 3}`
-- source revision: None
-- created: 2026-10-19T08:35:51.567186+00:00  |  total 372.5s, mean answer latency 9310 ms
+- settings: `{"deployment": "gpt-5.6-luna", "api_version": "2024-10-21", "provider_timeout_s": 120.0, "max_tokens": 4096, "max_retries": 2, "temperature": null, "max_turns": 3}`
+- source revision: e8cd5f1
+- created: 2026-10-19T10:36:58.167348+00:00  |  total 351.6s, mean answer latency 8790 ms
 - file hashes: answers.csv=fa28e813ea54, brand_facts.csv=2190d40fad2d, development_gold.csv=afe84cc78f30
 
 ## Counts
@@ -74,43 +74,43 @@ G=376 P=376 M=376 C=376  |  coverage C/G = 1.000
 
 | answer | status | claims | latency ms | error |
 |---|---|---|---|---|
-| A01 | ok | 9 | 10987 |  |
-| A02 | ok | 10 | 10937 |  |
-| A03 | ok | 9 | 8587 |  |
-| A04 | ok | 11 | 10194 |  |
-| A05 | ok | 8 | 10710 |  |
-| A06 | ok | 10 | 10554 |  |
-| A07 | ok | 8 | 11094 |  |
-| A08 | ok | 10 | 7763 |  |
-| A09 | ok | 9 | 9098 |  |
-| A10 | ok | 10 | 7717 |  |
-| A11 | ok | 10 | 10006 |  |
-| A12 | ok | 9 | 8715 |  |
-| A13 | ok | 10 | 9435 |  |
-| A14 | ok | 9 | 9562 |  |
-| A15 | ok | 10 | 8457 |  |
-| A16 | ok | 9 | 10405 |  |
-| A17 | ok | 11 | 11059 |  |
-| A18 | ok | 8 | 9463 |  |
-| A19 | ok | 10 | 10592 |  |
-| A20 | ok | 8 | 7338 |  |
-| A21 | ok | 8 | 6700 |  |
-| A22 | ok | 10 | 10987 |  |
-| A23 | ok | 8 | 8734 |  |
-| A24 | ok | 10 | 10297 |  |
-| A25 | ok | 9 | 9339 |  |
-| A26 | ok | 10 | 8621 |  |
-| A27 | ok | 9 | 8523 |  |
-| A28 | ok | 10 | 9639 |  |
-| A29 | ok | 9 | 6984 |  |
-| A30 | ok | 11 | 10099 |  |
-| A31 | ok | 10 | 9950 |  |
-| A32 | ok | 9 | 8262 |  |
-| A33 | ok | 11 | 9046 |  |
-| A34 | ok | 8 | 7680 |  |
-| A35 | ok | 10 | 9669 |  |
-| A36 | ok | 8 | 10172 |  |
-| A37 | ok | 10 | 9386 |  |
-| A38 | ok | 9 | 8928 |  |
-| A39 | ok | 10 | 8452 |  |
-| A40 | ok | 9 | 8267 |  |
+| A01 | ok | 9 | 10577 |  |
+| A02 | ok | 10 | 9753 |  |
+| A03 | ok | 9 | 7398 |  |
+| A04 | ok | 11 | 9695 |  |
+| A05 | ok | 8 | 8150 |  |
+| A06 | ok | 10 | 9016 |  |
+| A07 | ok | 8 | 7593 |  |
+| A08 | ok | 10 | 8102 |  |
+| A09 | ok | 9 | 8655 |  |
+| A10 | ok | 10 | 8584 |  |
+| A11 | ok | 10 | 7858 |  |
+| A12 | ok | 9 | 9287 |  |
+| A13 | ok | 10 | 10012 |  |
+| A14 | ok | 9 | 8860 |  |
+| A15 | ok | 10 | 9308 |  |
+| A16 | ok | 9 | 9627 |  |
+| A17 | ok | 11 | 10493 |  |
+| A18 | ok | 8 | 8758 |  |
+| A19 | ok | 10 | 8490 |  |
+| A20 | ok | 8 | 6491 |  |
+| A21 | ok | 8 | 8406 |  |
+| A22 | ok | 10 | 10061 |  |
+| A23 | ok | 8 | 8899 |  |
+| A24 | ok | 10 | 7533 |  |
+| A25 | ok | 9 | 7867 |  |
+| A26 | ok | 10 | 7627 |  |
+| A27 | ok | 9 | 8304 |  |
+| A28 | ok | 10 | 11748 |  |
+| A29 | ok | 9 | 8778 |  |
+| A30 | ok | 11 | 10408 |  |
+| A31 | ok | 10 | 9474 |  |
+| A32 | ok | 9 | 7780 |  |
+| A33 | ok | 11 | 7034 |  |
+| A34 | ok | 8 | 7995 |  |
+| A35 | ok | 10 | 9546 |  |
+| A36 | ok | 8 | 7098 |  |
+| A37 | ok | 10 | 11244 |  |
+| A38 | ok | 9 | 8217 |  |
+| A39 | ok | 10 | 8202 |  |
+| A40 | ok | 9 | 8676 |  |
