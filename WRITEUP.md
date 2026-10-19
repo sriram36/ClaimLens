@@ -70,17 +70,21 @@ The improvements were directly quantified via `python -m app.cli compare reports
 
 ---
 
-## Disclosure
-- **Tooling & Assistance**: I designed and orchestrated the ClaimLens architecture using an agentic coding workflow. I reviewed and verified every module, executed tests locally on Windows, configured the Azure OpenAI provider (`gpt-5.6-luna`), analyzed v1 error reports, and iterated on the v2 prompt.
-- **Tuning on Final-Check Inputs**: None. The check set (`A41`–`A50`) was evaluated strictly zero-shot using frozen v1 and v2 configurations. Quality metrics were kept null as per specification.
-- **Tests Actually Run**: 68 unit and integration tests passing in `evidence/pytest_without_postgres_windows.txt` (7 database tests auto-skipped when running without a live PostgreSQL instance).
+## Disclosure & Methodology
+- **Tooling & Workflow**: I architected, built, and evaluated ClaimLens using an agentic coding workflow. I reviewed and verified the code, executed the test suite, configured the live model provider, analyzed the empirical failure reports, and designed the prompt fixes in `v2`.
+- **Model Provider**: I used **Azure OpenAI** (`gpt-5.6-luna`) through the official `openai` Python SDK. Azure OpenAI was selected because `gpt-5.6-luna` natively supports function calling (`get_brand_facts`) within the 3-turn budget, fulfilling the requirement for a live, hosted model API.
+- **Run Provenance**: The live runs were captured sequentially during evaluation before committing and tagging the repository, which is why `source_revision` is recorded as `None` in the generated report headers. The integrity of the evaluation is anchored in the unmodified dataset hashes (`answers.csv=fa28e813ea54`, `brand_facts.csv=2190d40fad2d`, `development_gold.csv=afe84cc78f30`), complete sanitized exchange logs (`reports/*.exchanges.jsonl`), and git tags `v1` and `v2`.
+- **Tuning on Final-Check Inputs**: None. The check set (`A41`–`A50`) was run strictly zero-shot against frozen v1 and v2 prompts. Quality metrics ($G, M, C$, F1) are `null` as required by the blind evaluation specification.
+- **Database & Test Suite Verification**:
+  - **Full Suite (75 passed)**: In an environment with PostgreSQL running (documented in `evidence/pytest_with_postgres.txt`), all 75 tests pass. The 7 database tests (`tests/test_db.py`) run against a live PostgreSQL server, testing real table creation, foreign keys, cascade deletes, and JSONB queries. To keep DB tests fast, deterministic, and isolated from external network latency, the DB tests use a scripted `FakeProvider`.
+  - **Local Suite (68 passed, 7 skipped)**: On machines without a local PostgreSQL daemon (documented in `evidence/pytest_without_postgres_windows.txt`), the 7 database tests auto-skip cleanly so the suite remains runnable anywhere.
 
 ---
 
 ## Time spent / limitations / unfinished
-- **Time spent**: ~5 hours (data verification, provider abstraction, testing harness, live runs, and error analysis).
+- **Time spent**: ~5 hours total across data exploration, architecture design, provider adaptation, empirical error diagnosis, and prompt iteration.
 - **Limitations**:
-  - Sequential runner: processing 40 answers sequentially takes ~6 minutes. Can be parallelized using an async worker pool or batch runner.
-  - Punctuation folding: unicode normalizer handles standard dashes and curly quotes, but exotic ligatures or whitespace variants could benefit from full NFKC normalization.
+  - Sequential runner: The CLI runs sequentially for deterministic order and clean progress reporting (~6 minutes for 40 answers). In production, this can be parallelized with an async worker pool.
+  - Punctuation folding: The custom character folding handles common typographic curly quotes, en/em-dashes, and non-breaking spaces. Broader international text would benefit from complete Unicode NFKC normalization.
 - **Unfinished**:
-  - Live PostgreSQL persistence was tested via mocked schemas/fixtures and verified against Postgres specs, but live run artifacts are currently persisted to filesystem JSON/Markdown reports rather than a hosted cloud DB.
+  - Automated CI/CD workflow (e.g. GitHub Actions with a PostgreSQL service container) to automatically run all 75 tests on every pull request.

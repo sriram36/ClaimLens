@@ -68,12 +68,16 @@ invalid model output; 504 provider timeout; 503 no `DATABASE_URL`. Error bodies 
 - Timeouts: **120 s per provider request** (`KASPARRO_TIMEOUT_S`), SDK retries 2 (`KASPARRO_MAX_RETRIES`) for 429/5xx/connection errors.
 - Scorer: exact `(answer_id, start, end)` plus quote equality, each gold matched at most once; no fuzzy matching, no judge.
 
-## v1 and v2
-- **v1** (`prompts/v1.md`): task, extraction rules, labeling rules, fact-usage rules, JSON output. No checklist.
-- **v2** (`prompts/v2.md`): v1 + a per-claim verification checklist (exact model, scope/condition match, factual components, per-component
-  established/refuted/unresolved, combine rule) written into an optional `analysis` field, plus explicit pitfalls. **This is a pre-run hypothesis
-  that labeling scope errors dominate. Replace it with whatever v1's error report actually shows**, then describe the diagnosis in WRITEUP.md.
-  Only the prompt file may differ between v1 and v2; model, settings, data and scorer stay fixed.
+## Prompt Versions: v1 vs v2
 
-## Honest status
-See `WRITEUP.md` (fill in measured numbers; do not invent them).
+- **v1** (`prompts/v1.md`): Baseline prompt defining the task, factual extraction boundaries (excluding generic advice), truth-labeling rules (`supported`, `contradicted`, `unknown`), and JSON response schema.
+- **v2** (`prompts/v2.md`): Refined prompt directly targeting the failure modes diagnosed from the v1 development error report:
+  1. *Catalogue Brand Boundary*: Enforces strict restriction that `get_brand_facts` may only be called for registered brands (`cleartrail`, `cloudnote`, `stonewave`), preventing fatal tool errors on unlisted competitors (such as `rivalsound` in `A24`).
+  2. *Comparison Direction*: Mandates validating both the difference magnitude and directionality on comparative price claims (fixing reverse price comparisons in `A09`, `A16`, `A35`).
+  3. *Core Feature Booleans vs. Qualification*: Instructs the agent to match core feature assertions against catalogue booleans without rejecting claims due to trailing conversational context (fixing `A12`, `A15`, `A29`).
+  4. *Box Inclusions*: Clarifies adapter inclusion semantics.
+
+All data, scoring logic, model configuration, and runtime settings remained strictly fixed between v1 and v2. See `reports/comparison_v1_v2_development.md` for the full empirical comparison.
+
+## Evaluation Write-up
+See `WRITEUP.md` for detailed results, failure analysis, architecture decisions, and disclosures.
