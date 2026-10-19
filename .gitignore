@@ -1,0 +1,23 @@
+# secrets and local env
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# IDE / OS
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Run outputs (generated; not evidence)
+# Keep reports/ tracked so the four required reports are committed
+# Exclude only the exchanges JSONL (large, reviewers don't need raw traces)
+reports/*.exchanges.jsonl

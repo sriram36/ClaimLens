@@ -1,0 +1,8 @@
+openai==1.82.1
+fastapi==0.146.0
+uvicorn==0.54.0
+pydantic==2.14.1
+psycopg[binary]==3.3.6
+httpx==0.28.1
+pytest==9.1.1
+pytest-anyio==0.0.0

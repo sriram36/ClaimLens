@@ -1,0 +1,6 @@
+# Normalise line endings: LF in repo, CRLF on Windows checkout
+* text=auto
+
+# Data files: preserve exact bytes (offsets depend on this)
+data/*.csv binary
+evidence/*.txt text eol=lf
